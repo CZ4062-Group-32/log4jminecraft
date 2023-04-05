@@ -1,10 +1,13 @@
 #!/usr/bin/env python3
 
+import json
 import subprocess
 
-#1. Install netcat
-print("**Installing netcat!**\n")
-subprocess.run(["sudo", "apt", "install", "netcat-traditional", "-y"])
+if __name__ == "__main__":
+    with open("config.json", "r") as f:
+        config = json.load(f)
 
-#2. Start netcat listener for reserver shell
-subprocess.run(["nc", "-lnvp", "9898"])
+    print("**Installing netcat!**\n")
+    subprocess.run(["sudo", "apt", "install", "netcat-traditional", "-y"])
+
+    subprocess.run(["nc", "-lnvp", config["shell_port"]])
